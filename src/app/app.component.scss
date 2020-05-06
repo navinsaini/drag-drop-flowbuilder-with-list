@@ -1,0 +1,238 @@
+.app-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+
+  .main {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .app-content {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.dialog-wrapper {
+
+  &,
+  .dialog-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .command-bar {
+      border-bottom: 1px solid #e8eaec;
+      position: relative;
+      display: flex;
+      background: #fff;
+      align-items: center;
+
+      .command-bar-title {
+        min-width: 27%;
+        width: auto;
+
+        .header-title {
+          font-size: 14px;
+          line-height: 28px;
+          letter-spacing: 0;
+          font-weight: 600;
+          padding-left: 32px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+
+      .command-buttons {
+        width: 100%;
+      }
+    }
+
+    .body {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: auto;
+
+      .graph {
+        flex: 1;
+        display: flex;
+      }
+    }
+  }
+}
+
+.graph {
+  position: relative;
+  opacity: 0;
+  transition: opacity .5s;
+
+  &.stable {
+    opacity: 1;
+  }
+
+  .boundary-corner {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+  }
+
+  svg {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+    margin-left: -1px;
+
+    .path {
+      stroke: gray;
+      stroke-width: 2;
+      fill: none;
+    }
+  }
+
+}
+
+.transformable-view {
+  flex: 1;
+  display: flex;
+
+  .scrollable {
+    position: relative;
+    overflow: auto;
+    flex: 1;
+
+    .boundary {
+      position: absolute;
+      overflow: hidden;
+
+      .transform-target {
+        position: absolute;
+        transition: transform .1s;
+      }
+    }
+  }
+
+  .transform-buttons {
+    position: absolute;
+    left: 15px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 500;
+
+    button {
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      height: 44px;
+      width: 44px;
+      position: relative;
+      font-size: 14px;
+      font-weight: 400;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0px 4px;
+      user-select: none;
+      outline: transparent;
+      border-width: initial;
+      border-style: none;
+      border-color: initial;
+      border-image: initial;
+      text-decoration: none;
+      border-radius: 2px;
+
+      &:hover {
+        background: rgba(0, 0, 0, .7);
+        color: #fff;
+      }
+
+      img {
+        width: 22px;
+      }
+    }
+  }
+
+  .transformable-panel-container {
+    position: absolute;
+    left: 70px;
+    bottom: 20px;
+    z-index: 500;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .3s, visibility .3s;
+
+    &.collapsed {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.cdk-drop-node {
+  position: absolute;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: none;
+}
+
+
+.drag-handler {
+  width: 18px;
+  height: 14px;
+  background: black;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  border-radius: 5px;
+  cursor: grab;
+
+  &:before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: #fff;
+    position: absolute;
+    left: 0px;
+    top: 4px;
+  }
+
+  &:after {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: #fff;
+    position: absolute;
+    left: 0px;
+    bottom: 4px;
+  }
+}

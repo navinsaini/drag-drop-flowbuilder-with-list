@@ -1,0 +1,49 @@
+<div class="app-container">
+  <div class="main">
+    <div class="app-content">
+      <div class="dialog-wrapper">
+        <div class="dialog-panel">
+          <div class="body">
+            <div class="graph" [class.stable]="isGraphStable">
+              <div #transformableElm class="transformable-view">
+                <div #rootElm class="scrollable transform-interactive-zone" (mousedown)="handleMouseDown($event)"
+                  (mousemove)="handleMouseMove($event)" (mouseup)="handleMouseUp($event)"
+                  (wheel)="handleMouseWheel($event)" (transitionend)="updateView()">
+                  <div #boundryElm class="boundary transform-interactive-zone" cdkDropListGroup>
+                    <div #targetElm class="transform-target transform-interactive-zone">
+                      <div #boundryCornerElm class="boundary-corner"></div>
+                      <ng-container *ngFor="let items of displayRecords;let pIndex=index">
+                        <div class="cdk-drop-node" *ngFor="let item of items;let cIndex=index" cdkDropList
+                          id={{item.id}} (cdkDropListDropped)="onDrop($event,item)">
+                          <app-node id={{item.id}} cdkDrag (cdkDragMoved)="onDragMove($event)"
+                            (cdkDragEntered)="onDragEnter($event)" [cdkDragData]="item"
+                            [cdkDragDisabled]="displayRecords.length==1" #allNodes [scale]="transformParams.scale"
+                            [rowTotal]="items.length" [pIndex]="pIndex" [cIndex]="cIndex" [nodeProps]="item"
+                            [maxWidth]="maxWidth" [prevHeight]="prevHeight" (onHeight)="onHeight($event)"
+                            (onAddNew)="onAddNew($event)" (onDeleteNode)="onDeleteNode($event)">
+                            <div *ngIf="displayRecords.length>1" cdkDragHandle class="drag-handler"></div>
+                          </app-node>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="transform-buttons">
+                  <button type="button" title="Zoom in" (click)="handleButtonAction('ZOOMIN')">
+                    <img src="assets/zoom-in.svg" />
+                  </button>
+                  <button type="button" title="Recenter" (click)="handleButtonAction('RECENTER')">
+                    <img src="assets/recenter.svg" />
+                  </button>
+                  <button type="button" title="Zoom out" (click)="handleButtonAction('ZOOMOUT')">
+                    <img src="assets/zoom-out.svg" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

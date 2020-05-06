@@ -1,0 +1,8 @@
+<div class="node" [style.width]="nodeProps.width" [style.height]="nodeProps.height">
+  <ng-content></ng-content>
+  <div class="content">{{nodeProps.title}}</div>
+  <div class="btns">
+    <div class="btn" (click)="addNewBlock()">Add Block</div>
+    <div class="btn red" *ngIf="pIndex!=0" (click)="deleteBlock()">Delete Block</div>
+  </div>
+</div>
